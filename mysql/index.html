@@ -1,0 +1,1312 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Guías de instalación y primera práctica de MongoDB y MySQL en Ubuntu">
+      
+      
+      
+      
+        <link rel="prev" href="../mongodb/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>MySQL (SQL) - Manuales de Bases de Datos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mysql-en-ubuntu" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Manuales de Bases de Datos" class="md-header__button md-logo" aria-label="Manuales de Bases de Datos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Manuales de Bases de Datos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MySQL (SQL)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Manuales de Bases de Datos" class="md-nav__button md-logo" aria-label="Manuales de Bases de Datos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Manuales de Bases de Datos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB (NoSQL)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL (SQL)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL (SQL)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-proposito-y-alcance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo, propósito y alcance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-fundamentales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos fundamentales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-por-terminal-metodo-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalación por terminal (método recomendado)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Instalación por terminal (método recomendado)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-abrir-la-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1. Abrir la terminal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-actualizar-el-indice-de-paquetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2. Actualizar el índice de paquetes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-instalar-el-servidor-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3. Instalar el servidor MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-verificar-el-servicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4. Verificar el servicio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-comprobar-la-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5. Comprobar la versión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-6-ingresar-como-administrador-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 6. Ingresar como administrador local
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interfaz-grafica-mysql-workbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interfaz gráfica: MySQL Workbench
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interfaz gráfica: MySQL Workbench">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-7-instalar-workbench-si-el-paquete-esta-disponible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 7. Instalar Workbench (si el paquete está disponible)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-8-crear-conexion-local-en-workbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 8. Crear conexión local en Workbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternativa-mediante-docker-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativa mediante Docker (opcional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-la-primera-base-de-datos-y-ejecutar-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear la primera base de datos y ejecutar SQL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crear la primera base de datos y ejecutar SQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-9-crear-y-seleccionar-la-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 9. Crear y seleccionar la base de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-10-crear-la-tabla-estudiantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 10. Crear la tabla estudiantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-11-insertar-tres-registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 11. Insertar tres registros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-12-consultar-y-filtrar-registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 12. Consultar y filtrar registros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-13-actualizar-y-eliminar-un-dato-de-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 13. Actualizar y eliminar un dato de prueba
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-14-salir-y-comprobar-persistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 14. Salir y comprobar persistencia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores-frecuentes-y-soluciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errores frecuentes y soluciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguridad-lista-de-verificacion-y-conclusiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seguridad, lista de verificación y conclusiones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-y-recursos-oficiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias y recursos oficiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-proposito-y-alcance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo, propósito y alcance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-fundamentales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos fundamentales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-por-terminal-metodo-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalación por terminal (método recomendado)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Instalación por terminal (método recomendado)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-abrir-la-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1. Abrir la terminal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-actualizar-el-indice-de-paquetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2. Actualizar el índice de paquetes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-instalar-el-servidor-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3. Instalar el servidor MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-verificar-el-servicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4. Verificar el servicio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-comprobar-la-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5. Comprobar la versión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-6-ingresar-como-administrador-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 6. Ingresar como administrador local
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interfaz-grafica-mysql-workbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interfaz gráfica: MySQL Workbench
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interfaz gráfica: MySQL Workbench">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-7-instalar-workbench-si-el-paquete-esta-disponible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 7. Instalar Workbench (si el paquete está disponible)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-8-crear-conexion-local-en-workbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 8. Crear conexión local en Workbench
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternativa-mediante-docker-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativa mediante Docker (opcional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-la-primera-base-de-datos-y-ejecutar-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear la primera base de datos y ejecutar SQL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crear la primera base de datos y ejecutar SQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-9-crear-y-seleccionar-la-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 9. Crear y seleccionar la base de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-10-crear-la-tabla-estudiantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 10. Crear la tabla estudiantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-11-insertar-tres-registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 11. Insertar tres registros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-12-consultar-y-filtrar-registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 12. Consultar y filtrar registros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-13-actualizar-y-eliminar-un-dato-de-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 13. Actualizar y eliminar un dato de prueba
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-14-salir-y-comprobar-persistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 14. Salir y comprobar persistencia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores-frecuentes-y-soluciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errores frecuentes y soluciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguridad-lista-de-verificacion-y-conclusiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seguridad, lista de verificación y conclusiones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-y-recursos-oficiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias y recursos oficiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="mysql-en-ubuntu">MySQL en Ubuntu</h1>
+<blockquote>
+<p>Guía académica para estudiantes:</p>
+</blockquote>
+<p>INSTRUCTIVO DE INSTALACIÓN Y CREACIÓN DE LA PRIMERA BASE DE DATOS EN MySQL</p>
+<p>Ubuntu 22.04 / 24.04 LTS · Nivel principiante</p>
+<p>Guía paso a paso: instalación mediante terminal, administración gráfica con MySQL Workbench y alternativa con Docker.</p>
+<p><img alt="Ilustración del instructivo MySQL en Ubuntu" src="../assets/mysql_1.png" /></p>
+<p>Elaborado por: Victoria Arrieta</p>
+<p>Fecha:12/11/2026</p>
+<ol>
+<li>
+<p>Introducción</p>
+</li>
+<li>
+<p>Objetivo, propósito y alcance</p>
+</li>
+<li>
+<p>Requisitos previos</p>
+</li>
+<li>
+<p>Conceptos fundamentales</p>
+</li>
+<li>
+<p>Instalación por terminal</p>
+</li>
+<li>
+<p>Interfaz gráfica: MySQL Workbench</p>
+</li>
+<li>
+<p>Alternativa mediante Docker</p>
+</li>
+<li>
+<p>Primera base de datos y consultas</p>
+</li>
+<li>
+<p>Errores frecuentes y soluciones</p>
+</li>
+<li>
+<p>Seguridad, comprobación y conclusiones</p>
+</li>
+<li>
+<p>Referencias</p>
+</li>
+</ol>
+<h2 id="introduccion">Introducción</h2>
+<div class="highlight"><pre><span></span><code>MySQL<span class="w"> </span>es<span class="w"> </span>un<span class="w"> </span>sistema<span class="w"> </span>de<span class="w"> </span>gestión<span class="w"> </span>de<span class="w"> </span>bases<span class="w"> </span>de<span class="w"> </span>datos<span class="w"> </span>relacionales<span class="w"> </span><span class="o">(</span>RDBMS<span class="o">)</span>.<span class="w"> </span>Organiza<span class="w"> </span>la<span class="w"> </span>información<span class="w"> </span>en<span class="w"> </span>tablas<span class="w"> </span>con<span class="w"> </span>filas<span class="w"> </span>y<span class="w"> </span>columnas<span class="w"> </span>y<span class="w"> </span>utiliza<span class="w"> </span>SQL<span class="w"> </span><span class="o">(</span>Structured<span class="w"> </span>Query<span class="w"> </span>Language<span class="o">)</span><span class="w"> </span>para<span class="w"> </span>crear,<span class="w"> </span>consultar<span class="w"> </span>y<span class="w"> </span>modificar<span class="w"> </span>datos.<span class="w"> </span>A<span class="w"> </span>diferencia<span class="w"> </span>de<span class="w"> </span>MongoDB,<span class="w"> </span>MySQL<span class="w"> </span>es<span class="w"> </span>una<span class="w"> </span>base<span class="w"> </span>de<span class="w"> </span>datos<span class="w"> </span>SQL<span class="w"> </span>relacional.<span class="w"> </span>Esta<span class="w"> </span>guía<span class="w"> </span>permite<span class="w"> </span>instalar<span class="w"> </span>un<span class="w"> </span>servidor<span class="w"> </span><span class="nb">local</span><span class="w"> </span>y<span class="w"> </span>realizar<span class="w"> </span>una<span class="w"> </span>primera<span class="w"> </span>práctica<span class="w"> </span>sin<span class="w"> </span>experiencia<span class="w"> </span>avanzada.
+</code></pre></div>
+<h2 id="objetivo-proposito-y-alcance">Objetivo, propósito y alcance</h2>
+<p>Objetivo: instalar y verificar MySQL en Ubuntu, crear una base de datos y una tabla, insertar registros y realizar consultas SQL básicas.</p>
+<p>Propósito: ofrecer un procedimiento reproducible y didáctico para estudiantes de fundamentos de bases de datos.</p>
+<p>Alcance: equipos Ubuntu 22.04 o 24.04 LTS con acceso administrativo; servidor local para aprendizaje. No incluye despliegues productivos, alta disponibilidad ni exposición a Internet.</p>
+<h2 id="requisitos-previos">Requisitos previos</h2>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Recomendación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sistema operativo</td>
+<td>Ubuntu 22.04 o 24.04 LTS, 64 bits</td>
+</tr>
+<tr>
+<td>Hardware</td>
+<td>2 GB RAM mínimo para laboratorio sencillo; 4 GB recomendado; 2 GB libres o más</td>
+</tr>
+<tr>
+<td>Permisos</td>
+<td>Usuario con sudo</td>
+</tr>
+<tr>
+<td>Conexión</td>
+<td>Internet para descargar paquetes</td>
+</tr>
+<tr>
+<td>Conocimientos</td>
+<td>Abrir terminal, ejecutar comandos, nociones básicas de tablas</td>
+</tr>
+</tbody>
+</table>
+<p>Advertencia: las versiones disponibles dependen de los repositorios de Ubuntu. El paquete mysql-server de APT puede no coincidir con la versión más reciente publicada por Oracle.</p>
+<h2 id="conceptos-fundamentales">Conceptos fundamentales</h2>
+<p>Servidor MySQL: servicio que almacena y gestiona los datos. Cliente mysql: herramienta de línea de comandos para enviar instrucciones SQL. MySQL Workbench: aplicación gráfica opcional para administrar el servidor. Base de datos: conjunto organizado de tablas. Tabla: estructura de columnas y filas.</p>
+<p><img alt="Ilustración del instructivo MySQL en Ubuntu" src="../assets/mysql_2.png" /></p>
+<p>Figura 2. Secuencia general del procedimiento (ilustración didáctica).</p>
+<h2 id="instalacion-por-terminal-metodo-recomendado">Instalación por terminal (método recomendado)</h2>
+<h3 id="paso-1-abrir-la-terminal">Paso 1. Abrir la terminal</h3>
+<p>Presiona Ctrl + Alt + T. Comprueba la versión del sistema.</p>
+<div class="highlight"><pre><span></span><code>lsb_release<span class="w"> </span>-a
+</code></pre></div>
+<p>Resultado esperado: Se muestra la versión de Ubuntu.</p>
+<h3 id="paso-2-actualizar-el-indice-de-paquetes">Paso 2. Actualizar el índice de paquetes</h3>
+<p>Actualiza la lista de software disponible antes de instalar.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</code></pre></div>
+<p>Resultado esperado: El comando finaliza sin errores de repositorios.</p>
+<h3 id="paso-3-instalar-el-servidor-mysql">Paso 3. Instalar el servidor MySQL</h3>
+<p>Instala el paquete distribuido por los repositorios configurados de Ubuntu.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mysql-server<span class="w"> </span>-y
+</code></pre></div>
+<p>Resultado esperado: APT instala el servidor y sus dependencias.</p>
+<h3 id="paso-4-verificar-el-servicio">Paso 4. Verificar el servicio</h3>
+<p>Consulta el estado del servicio. Si no está activo, inícialo.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mysql
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mysql
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>mysql
+</code></pre></div>
+<p>Resultado esperado: El estado muestra active (running). Para salir de status, presiona q.</p>
+<h3 id="paso-5-comprobar-la-version">Paso 5. Comprobar la versión</h3>
+<p>Verifica que el cliente de MySQL esté instalado.</p>
+<div class="highlight"><pre><span></span><code>mysql<span class="w"> </span>--version
+</code></pre></div>
+<p>Resultado esperado: Aparece una versión de MySQL.</p>
+<h3 id="paso-6-ingresar-como-administrador-local">Paso 6. Ingresar como administrador local</h3>
+<p>En instalaciones Ubuntu habituales, la cuenta root de MySQL utiliza autenticación mediante socket de Unix. Accede desde el sistema con sudo.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mysql
+</code></pre></div>
+<p>Resultado esperado: Aparece el indicador mysql&gt;. Si falla, revisa la sección de errores.</p>
+<p>ADVERTENCIA: No cambies a contraseñas débiles ni habilites acceso remoto de root para resolver problemas. En un laboratorio local es preferible conservar el método de autenticación predeterminado.</p>
+<h2 id="interfaz-grafica-mysql-workbench">Interfaz gráfica: MySQL Workbench</h2>
+<p>Workbench NO instala por sí mismo el servidor MySQL: es un cliente visual para conectarse a un servidor ya instalado. En Ubuntu puede estar disponible como paquete en los repositorios habilitados o mediante descargas oficiales compatibles con la versión del sistema.</p>
+<h3 id="paso-7-instalar-workbench-si-el-paquete-esta-disponible">Paso 7. Instalar Workbench (si el paquete está disponible)</h3>
+<p>Comprueba primero su disponibilidad. Si Ubuntu indica que no existe candidato, consulta el sitio oficial de MySQL Workbench para un paquete compatible.</p>
+<p>apt policy mysql-workbench
+sudo apt install mysql-workbench</p>
+<p>Resultado esperado: Si se instala, podrás iniciar la aplicación desde el menú de aplicaciones.</p>
+<h3 id="paso-8-crear-conexion-local-en-workbench">Paso 8. Crear conexión local en Workbench</h3>
+<p>Abre Workbench; selecciona una conexión nueva; hostname 127.0.0.1, puerto 3306 y un usuario MySQL válido. Para la cuenta root con autenticación socket, puede ser necesario crear un usuario de laboratorio con contraseña en lugar de usar root desde Workbench.</p>
+<p>Resultado esperado: La conexión de prueba se completa correctamente.</p>
+<p>Crea el usuario de laboratorio desde sudo mysql, si necesitas acceso por contraseña:</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'alumno'</span><span class="o">@</span><span class="s1">'localhost'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'Cambia_Esta_Clave_2026!'</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">escuela_db</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'alumno'</span><span class="o">@</span><span class="s1">'localhost'</span><span class="p">;</span>
+</code></pre></div>
+<p>Nota: el permiso sobre escuela_db puede configurarse antes de crearla; para conectar por TCP con 127.0.0.1, la coincidencia de host y método de autenticación puede requerir ajustes. Para principiantes, primero realiza la práctica desde la terminal.</p>
+<h2 id="alternativa-mediante-docker-opcional">Alternativa mediante Docker (opcional)</h2>
+<p>Este método ejecuta MySQL dentro de un contenedor; no es necesario si ya utilizas la instalación por APT. Requiere Docker Engine funcionando. No ejecutes ambos servidores en el mismo puerto 3306.</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>mysql_lab_data
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>mysql-lab<span class="w"> </span>-e<span class="w"> </span><span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="s1">'ClaveTemporalSegura_2026!'</span><span class="w"> </span>-e<span class="w"> </span><span class="nv">MYSQL_DATABASE</span><span class="o">=</span>escuela_db<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:3307:3306<span class="w"> </span>-v<span class="w"> </span>mysql_lab_data:/var/lib/mysql<span class="w"> </span>mysql:8.4
+docker<span class="w"> </span>logs<span class="w"> </span>mysql-lab
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>mysql-lab<span class="w"> </span>mysql<span class="w"> </span>-uroot<span class="w"> </span>-p
+</code></pre></div>
+<p>Al solicitar la contraseña, escribe la definida en MYSQL_ROOT_PASSWORD. Espera a que el registro del contenedor indique que está listo. Se usa el puerto 3307 del equipo para evitar conflictos con una instalación local.</p>
+<h2 id="crear-la-primera-base-de-datos-y-ejecutar-sql">Crear la primera base de datos y ejecutar SQL</h2>
+<p>Entra con sudo mysql (instalación APT) o desde el cliente del contenedor. Ejecuta las sentencias siguientes una a una. Cada instrucción SQL termina en punto y coma (;).</p>
+<h3 id="paso-9-crear-y-seleccionar-la-base-de-datos">Paso 9. Crear y seleccionar la base de datos</h3>
+<p>La instrucción CREATE DATABASE crea el espacio lógico; USE lo selecciona.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">escuela_db</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">escuela_db</span><span class="p">;</span>
+</code></pre></div>
+<p>Resultado esperado: escuela_db aparece entre las bases de datos.</p>
+<h3 id="paso-10-crear-la-tabla-estudiantes">Paso 10. Crear la tabla estudiantes</h3>
+<p>Define un identificador único y columnas de nombre, programa y edad.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">estudiantes</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="n">nombre</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">programa</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">edad</span><span class="w"> </span><span class="nb">INT</span>
+<span class="p">);</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span>
+</code></pre></div>
+<p>Resultado esperado: Se muestra la tabla estudiantes.</p>
+<h3 id="paso-11-insertar-tres-registros">Paso 11. Insertar tres registros</h3>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">agrega</span><span class="w"> </span><span class="n">datos</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">ejemplo</span><span class="p">.</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">estudiantes</span><span class="w"> </span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">programa</span><span class="p">,</span><span class="w"> </span><span class="n">edad</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="p">(</span><span class="s1">'Ana Ruiz'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Soporte de Sistemas'</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'Luis Perez'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Desarrollo Web'</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">'Sara Gomez'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Bases de Datos'</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">);</span>
+</code></pre></div>
+<p>Resultado esperado: El servidor confirma tres filas insertadas.</p>
+<h3 id="paso-12-consultar-y-filtrar-registros">Paso 12. Consultar y filtrar registros</h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">permite</span><span class="w"> </span><span class="n">visualizar</span><span class="w"> </span><span class="n">los</span><span class="w"> </span><span class="n">datos</span><span class="p">.</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">filtra</span><span class="w"> </span><span class="n">los</span><span class="w"> </span><span class="n">resultados</span><span class="p">.</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">estudiantes</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">programa</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">estudiantes</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">edad</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">21</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">estudiantes</span><span class="p">;</span>
+</code></pre></div>
+<p>Resultado esperado: Se observan tres registros y total = 3 (si no se ejecutó antes la inserción).</p>
+<h3 id="paso-13-actualizar-y-eliminar-un-dato-de-prueba">Paso 13. Actualizar y eliminar un dato de prueba</h3>
+<p>Practica UPDATE y DELETE usando WHERE para evitar afectar todas las filas.</p>
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">estudiantes</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">23</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Luis Perez'</span><span class="p">;</span>
+<span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">estudiantes</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Sara Gomez'</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">estudiantes</span><span class="p">;</span>
+</code></pre></div>
+<p>Resultado esperado: Quedan dos registros. Puedes repetir la práctica recreando la tabla.</p>
+<h3 id="paso-14-salir-y-comprobar-persistencia">Paso 14. Salir y comprobar persistencia</h3>
+<p>Cierra el cliente, vuelve a entrar y consulta la tabla.</p>
+<p>EXIT;
+sudo mysql -e "SELECT * FROM escuela_db.estudiantes;"</p>
+<p>Resultado esperado: Los datos permanecen almacenados después de cerrar el cliente.</p>
+<h2 id="errores-frecuentes-y-soluciones">Errores frecuentes y soluciones</h2>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Posible causa / solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unable to locate package mysql-server</td>
+<td>Ejecuta sudo apt update; verifica conexión y repositorios de Ubuntu.</td>
+</tr>
+<tr>
+<td>Unit mysql.service not found</td>
+<td>El paquete no se instaló; comprueba dpkg -l mysql-server.</td>
+</tr>
+<tr>
+<td>Access denied for user root</td>
+<td>En Ubuntu prueba sudo mysql; no supongas que root tiene contraseña.</td>
+</tr>
+<tr>
+<td>Can't connect to local MySQL server</td>
+<td>Verifica sudo systemctl status mysql; inicia servicio y revisa logs.</td>
+</tr>
+<tr>
+<td>Port 3306 already in use</td>
+<td>Otro servidor usa el puerto; para Docker usa 3307 local.</td>
+</tr>
+<tr>
+<td>Workbench no disponible en APT</td>
+<td>Consulta paquete oficial compatible; la terminal sigue siendo suficiente.</td>
+</tr>
+<tr>
+<td>ERROR 1046 No database selected</td>
+<td>Ejecuta USE escuela_db; antes de crear tablas.</td>
+</tr>
+<tr>
+<td>ERROR 1062 Duplicate entry</td>
+<td>Hay una clave primaria repetida; usa AUTO_INCREMENT y evita IDs duplicados.</td>
+</tr>
+<tr>
+<td>ERROR 1064 SQL syntax</td>
+<td>Revisa comas, paréntesis, comillas y punto y coma final.</td>
+</tr>
+</tbody>
+</table>
+<p>Diagnóstico útil:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>mysql<span class="w"> </span>--no-pager<span class="w"> </span>-n<span class="w"> </span><span class="m">40</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>mysql
+</code></pre></div>
+<h2 id="seguridad-lista-de-verificacion-y-conclusiones">Seguridad, lista de verificación y conclusiones</h2>
+<p>Seguridad: usa contraseñas robustas para usuarios con contraseña; limita permisos; evita exponer el puerto 3306 a redes externas; no uses root en aplicaciones; realiza respaldos antes de borrar datos. En instalaciones nuevas revisa las opciones de endurecimiento disponibles, como mysql_secure_installation, comprendiendo cada pregunta antes de confirmar.</p>
+<p>Lista de verificación:</p>
+<p>[ ] Ubuntu y acceso sudo verificados</p>
+<p>[ ] MySQL instalado y servicio activo</p>
+<p>[ ] Acceso al cliente mysql confirmado</p>
+<p>[ ] Base escuela_db creada</p>
+<p>[ ] Tabla estudiantes creada</p>
+<p>[ ] Registros insertados y consultados</p>
+<p>[ ] Errores identificados y documentados</p>
+<p>Conclusión: el estudiante instaló un motor relacional, distinguió servidor y cliente, creó su primera base de datos y ejecutó operaciones SQL esenciales. La terminal permite completar toda la práctica; Workbench y Docker son opciones complementarias.</p>
+<h2 id="referencias-y-recursos-oficiales">Referencias y recursos oficiales</h2>
+<div class="highlight"><pre><span></span><code>MySQL<span class="w"> </span>Reference<span class="w"> </span>Manual:<span class="w"> </span>https://dev.mysql.com/doc/refman/8.4/en/
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>MySQL<span class="w"> </span>Workbench:<span class="w"> </span>https://dev.mysql.com/doc/workbench/en/
+</code></pre></div>
+<p>Ubuntu Server – MySQL: https://documentation.ubuntu.com/server/how-to/databases/install-mysql/</p>
+<div class="highlight"><pre><span></span><code>Docker<span class="w"> </span>Official<span class="w"> </span>Image<span class="w"> </span>mysql:<span class="w"> </span>https://hub.docker.com/_/mysql
+</code></pre></div>
+<p>Nota editorial: diagramas originales ilustrativos; no son capturas de pantalla de una ejecución real. Los nombres y registros de ejemplo son ficticios.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

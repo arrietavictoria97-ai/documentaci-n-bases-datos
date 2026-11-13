@@ -1,0 +1,1684 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Guías de instalación y primera práctica de MongoDB y MySQL en Ubuntu">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../mysql/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>MongoDB (NoSQL) - Manuales de Bases de Datos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mongodb-en-ubuntu" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Manuales de Bases de Datos" class="md-header__button md-logo" aria-label="Manuales de Bases de Datos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Manuales de Bases de Datos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MongoDB (NoSQL)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Manuales de Bases de Datos" class="md-nav__button md-logo" aria-label="Manuales de Bases de Datos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Manuales de Bases de Datos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB (NoSQL)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MongoDB (NoSQL)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-proposito-y-alcance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo, propósito y alcance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requisitos previos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comprobar-version-y-arquitectura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprobar versión y arquitectura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-esenciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos esenciales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-a-instalacion-mediante-comandos-apt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método A: instalación mediante comandos APT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Método A: instalación mediante comandos APT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-actualizar-el-indice-de-paquetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1. Actualizar el índice de paquetes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-instalar-herramientas-necesarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2. Instalar herramientas necesarias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-importar-la-clave-de-firma-del-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3. Importar la clave de firma del repositorio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-registrar-el-repositorio-oficial-para-ubuntu-2404" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4. Registrar el repositorio oficial para Ubuntu 24.04
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-actualizar-repositorios-e-instalar-mongodb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5. Actualizar repositorios e instalar MongoDB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-6-iniciar-el-servicio-y-habilitar-el-arranque-automatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 6. Iniciar el servicio y habilitar el arranque automático
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-7-comprobar-que-el-servicio-este-activo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 7. Comprobar que el servicio esté activo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-8-abrir-la-consola-y-comprobar-conexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 8. Abrir la consola y comprobar conexión
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-b-interfaz-grafica-mongodb-compass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método B: interfaz gráfica MongoDB Compass
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Método B: interfaz gráfica MongoDB Compass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-descargar-compass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1. Descargar Compass
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-instalar-el-archivo-deb-descargado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2. Instalar el archivo .deb descargado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-abrir-compass-y-establecer-conexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3. Abrir Compass y establecer conexión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-crear-una-base-desde-compass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4. Crear una base desde Compass
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-c-ejecucion-alternativa-con-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método C: ejecución alternativa con Docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Método C: ejecución alternativa con Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-confirmar-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1. Confirmar Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-descargar-y-ejecutar-mongodb-80" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2. Descargar y ejecutar MongoDB 8.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-comprobar-y-acceder-a-mongosh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3. Comprobar y acceder a mongosh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practica-crear-y-consultar-una-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Práctica: crear y consultar una base de datos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Práctica: crear y consultar una base de datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-seleccionar-la-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1. Seleccionar la base de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-insertar-dos-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2. Insertar dos documentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-consultar-y-filtrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3. Consultar y filtrar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-actualizar-y-contar-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4. Actualizar y contar documentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-verificar-la-base-y-salir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5. Verificar la base y salir
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores-frecuentes-y-soluciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errores frecuentes y soluciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguridad-y-buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seguridad y buenas prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lista de verificación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusión y referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mysql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL (SQL)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-proposito-y-alcance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo, propósito y alcance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requisitos previos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comprobar-version-y-arquitectura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprobar versión y arquitectura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-esenciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos esenciales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-a-instalacion-mediante-comandos-apt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método A: instalación mediante comandos APT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Método A: instalación mediante comandos APT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-actualizar-el-indice-de-paquetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1. Actualizar el índice de paquetes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-instalar-herramientas-necesarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2. Instalar herramientas necesarias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-importar-la-clave-de-firma-del-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3. Importar la clave de firma del repositorio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-registrar-el-repositorio-oficial-para-ubuntu-2404" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4. Registrar el repositorio oficial para Ubuntu 24.04
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-actualizar-repositorios-e-instalar-mongodb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5. Actualizar repositorios e instalar MongoDB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-6-iniciar-el-servicio-y-habilitar-el-arranque-automatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 6. Iniciar el servicio y habilitar el arranque automático
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-7-comprobar-que-el-servicio-este-activo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 7. Comprobar que el servicio esté activo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-8-abrir-la-consola-y-comprobar-conexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 8. Abrir la consola y comprobar conexión
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-b-interfaz-grafica-mongodb-compass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método B: interfaz gráfica MongoDB Compass
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Método B: interfaz gráfica MongoDB Compass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-descargar-compass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1. Descargar Compass
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-instalar-el-archivo-deb-descargado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2. Instalar el archivo .deb descargado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-abrir-compass-y-establecer-conexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3. Abrir Compass y establecer conexión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-crear-una-base-desde-compass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4. Crear una base desde Compass
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-c-ejecucion-alternativa-con-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método C: ejecución alternativa con Docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Método C: ejecución alternativa con Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-confirmar-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1. Confirmar Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-descargar-y-ejecutar-mongodb-80" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2. Descargar y ejecutar MongoDB 8.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-comprobar-y-acceder-a-mongosh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3. Comprobar y acceder a mongosh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practica-crear-y-consultar-una-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Práctica: crear y consultar una base de datos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Práctica: crear y consultar una base de datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-seleccionar-la-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1. Seleccionar la base de datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-insertar-dos-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2. Insertar dos documentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-consultar-y-filtrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3. Consultar y filtrar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-actualizar-y-contar-documentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4. Actualizar y contar documentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-verificar-la-base-y-salir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5. Verificar la base y salir
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errores-frecuentes-y-soluciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errores frecuentes y soluciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguridad-y-buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seguridad y buenas prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lista de verificación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusión y referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="mongodb-en-ubuntu">MongoDB en Ubuntu</h1>
+<blockquote>
+<p>Guía académica para estudiantes principiantes.</p>
+</blockquote>
+<p>MANUAL DE INSTALACIÓN Y CONFIGURACIÓN
+DE MONGODB EN UBUNTU</p>
+<p>Base de datos NoSQL · Guía para estudiantes principiantes</p>
+<p><img alt="Ilustración del instructivo MongoDB en Ubuntu" src="../assets/mongodb_1.png" /></p>
+<p>Figura 1. Componentes básicos del entorno MongoDB.</p>
+<p>Modalidad: práctica guiada en Linux Ubuntu</p>
+<p>Versiones de referencia: Ubuntu 22.04 / 24.04 LTS y MongoDB 8.0</p>
+<p>Fecha de elaboración: noviembre de 2026</p>
+<p>Autor: material de apoyo académico</p>
+<ol>
+<li>
+<p>Introducción</p>
+</li>
+<li>
+<p>Objetivo, propósito y alcance</p>
+</li>
+<li>
+<p>Requisitos previos</p>
+</li>
+<li>
+<p>Conceptos esenciales</p>
+</li>
+<li>
+<p>Método A: instalación mediante comandos APT</p>
+</li>
+<li>
+<p>Método B: interfaz gráfica MongoDB Compass</p>
+</li>
+<li>
+<p>Método C: ejecución alternativa con Docker</p>
+</li>
+<li>
+<p>Práctica: crear y consultar una base de datos</p>
+</li>
+<li>
+<p>Errores frecuentes y soluciones</p>
+</li>
+<li>
+<p>Seguridad y buenas prácticas</p>
+</li>
+<li>
+<p>Lista de verificación</p>
+</li>
+<li>
+<p>Conclusión y referencias</p>
+</li>
+</ol>
+<p>Nota: los títulos están configurados como encabezados de Word para facilitar la navegación y la creación de una tabla de contenido automática.</p>
+<h2 id="introduccion">Introducción</h2>
+<p>Una base de datos NoSQL permite guardar información sin exigir que todos los registros tengan las mismas columnas. MongoDB es una base de datos documental: almacena documentos similares a JSON en colecciones. Este manual enseña a instalar un servidor local en Ubuntu, conectarse y realizar operaciones básicas.</p>
+<h2 id="objetivo-proposito-y-alcance">Objetivo, propósito y alcance</h2>
+<p>Objetivo: instalar y verificar MongoDB Community Edition en un equipo Ubuntu y ejecutar una práctica inicial de inserción y consulta.</p>
+<p>Propósito: ofrecer instrucciones reproducibles, explicadas paso a paso, para estudiantes con conocimientos básicos de bases de datos.</p>
+<p>Alcance: equipos de laboratorio o aprendizaje con Ubuntu 22.04/24.04 LTS de 64 bits, conexión a Internet y permisos sudo. No cubre despliegues de producción, clústeres ni acceso público desde Internet.</p>
+<h2 id="requisitos-previos">Requisitos previos</h2>
+<ul>
+<li>Ubuntu 22.04 LTS (jammy) o 24.04 LTS (noble), 64 bits; arquitectura compatible con la versión elegida.</li>
+<li>Usuario con permisos sudo, acceso a terminal y conexión estable a Internet.</li>
+<li>Recomendación para laboratorio: al menos 4 GB de RAM, 2 GB de espacio libre y capacidad adicional para datos (no son mínimos oficiales).</li>
+<li>Para Compass: entorno de escritorio gráfico y navegador web. Para Docker: Docker Engine instalado y funcionando.</li>
+<li>Guardar copia de seguridad si ya existe una instalación o datos de MongoDB.</li>
+</ul>
+<h3 id="comprobar-version-y-arquitectura">Comprobar versión y arquitectura</h3>
+<p>La distribución debe indicar 22.04 o 24.04; la arquitectura habitual es x86_64 (amd64).</p>
+<table>
+<thead>
+<tr>
+<th>lsb_release -a; uname -m</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="conceptos-esenciales">Conceptos esenciales</h2>
+<p>mongod: proceso servidor que almacena datos. mongosh: consola interactiva para consultar y modificar datos. MongoDB Compass: aplicación gráfica para explorar bases y colecciones. APT: gestor de paquetes de Ubuntu. Docker: sistema para ejecutar MongoDB dentro de un contenedor.</p>
+<p><img alt="Ilustración del instructivo MongoDB en Ubuntu" src="../assets/mongodb_2.png" /></p>
+<p>Figura 2. Secuencia lógica de instalación y comprobación.</p>
+<h2 id="metodo-a-instalacion-mediante-comandos-apt">Método A: instalación mediante comandos APT</h2>
+<p>Método recomendado para aprender la instalación local. Los comandos siguientes utilizan el repositorio oficial de MongoDB 8.0. Ejecútalos en la terminal de Ubuntu, no dentro de mongosh.</p>
+<h3 id="paso-1-actualizar-el-indice-de-paquetes">Paso 1. Actualizar el índice de paquetes</h3>
+<p>Introduce la contraseña del usuario cuando Ubuntu la solicite; al escribirla no se muestran caracteres.</p>
+<table>
+<thead>
+<tr>
+<th>sudo apt-get update</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-2-instalar-herramientas-necesarias">Paso 2. Instalar herramientas necesarias</h3>
+<table>
+<thead>
+<tr>
+<th>sudo apt-get install -y gnupg curl</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-3-importar-la-clave-de-firma-del-repositorio">Paso 3. Importar la clave de firma del repositorio</h3>
+<p>La clave permite verificar los paquetes descargados. No ignores errores de firma.</p>
+<table>
+<thead>
+<tr>
+<th>curl -fsSL https://pgp.mongodb.com/server-8.0.asc | \;   sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-8.0.gpg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-4-registrar-el-repositorio-oficial-para-ubuntu-2404">Paso 4. Registrar el repositorio oficial para Ubuntu 24.04</h3>
+<p>Si utilizas Ubuntu 22.04, usa el comando alternativo que aparece debajo; NO ejecutes ambos.</p>
+<table>
+<thead>
+<tr>
+<th>echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-5-actualizar-repositorios-e-instalar-mongodb">Paso 5. Actualizar repositorios e instalar MongoDB</h3>
+<p>El paquete mongodb-org instala el servidor y los componentes oficiales, incluido mongosh según el empaquetado de MongoDB.</p>
+<table>
+<thead>
+<tr>
+<th>sudo apt-get update; sudo apt-get install -y mongodb-org</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-6-iniciar-el-servicio-y-habilitar-el-arranque-automatico">Paso 6. Iniciar el servicio y habilitar el arranque automático</h3>
+<table>
+<thead>
+<tr>
+<th>sudo systemctl start mongod; sudo systemctl enable mongod</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-7-comprobar-que-el-servicio-este-activo">Paso 7. Comprobar que el servicio esté activo</h3>
+<p>Debe aparecer “active (running)”. Pulsa la tecla q para salir de la vista de estado.</p>
+<table>
+<thead>
+<tr>
+<th>sudo systemctl status mongod</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-8-abrir-la-consola-y-comprobar-conexion">Paso 8. Abrir la consola y comprobar conexión</h3>
+<p>La segunda línea se ejecuta dentro de mongosh. Debe responder con ok: 1. Para salir escribe exit.</p>
+<table>
+<thead>
+<tr>
+<th>mongosh; db.runCommand({ ping: 1 })</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Ilustración del instructivo MongoDB en Ubuntu" src="../assets/mongodb_3.png" /></p>
+<p>Figura 3. Ejemplo ilustrativo de resultados correctos; no es una captura real.</p>
+<h2 id="metodo-b-interfaz-grafica-mongodb-compass">Método B: interfaz gráfica MongoDB Compass</h2>
+<p>Compass no sustituye al servidor MongoDB: es una aplicación gráfica para conectarse a un servidor ya instalado (Método A) o remoto. Es la opción más sencilla para visualizar colecciones.</p>
+<h3 id="paso-1-descargar-compass">Paso 1. Descargar Compass</h3>
+<p>Desde Ubuntu abre la página oficial y selecciona la descarga .deb apropiada para tu sistema. Evita sitios de terceros.</p>
+<table>
+<thead>
+<tr>
+<th>https://www.mongodb.com/try/download/compass</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-2-instalar-el-archivo-deb-descargado">Paso 2. Instalar el archivo .deb descargado</h3>
+<p>Abre la carpeta Descargas, haz doble clic sobre el paquete .deb y elige “Instalar” en el instalador de aplicaciones de Ubuntu. La interfaz puede cambiar según la versión.</p>
+<h3 id="paso-3-abrir-compass-y-establecer-conexion">Paso 3. Abrir Compass y establecer conexión</h3>
+<p>Busca “MongoDB Compass” en Aplicaciones. En el campo URI escribe mongodb://localhost:27017 y pulsa Connect. El servidor mongod debe estar iniciado.</p>
+<h3 id="paso-4-crear-una-base-desde-compass">Paso 4. Crear una base desde Compass</h3>
+<p>Selecciona Create Database. Nombre de base: instituto. Nombre de colección: estudiantes. Confirma y abre la colección para explorar sus documentos.</p>
+<p>Alternativa gráfica: en algunos sistemas el archivo .deb se puede instalar desde el centro de software; si no se abre, usa el comando sudo apt install ./nombre-del-archivo.deb desde la carpeta donde está el archivo, sustituyendo el nombre real.</p>
+<h2 id="metodo-c-ejecucion-alternativa-con-docker">Método C: ejecución alternativa con Docker</h2>
+<p>Este método crea un servidor MongoDB aislado en un contenedor. Requiere Docker Engine previamente instalado; no es una instalación nativa de MongoDB en Ubuntu.</p>
+<h3 id="paso-1-confirmar-docker">Paso 1. Confirmar Docker</h3>
+<p>Si Docker no está instalado, sigue la guía oficial de Docker Engine para Ubuntu: https://docs.docker.com/engine/install/ubuntu/</p>
+<table>
+<thead>
+<tr>
+<th>docker --version; sudo docker info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-2-descargar-y-ejecutar-mongodb-80">Paso 2. Descargar y ejecutar MongoDB 8.0</h3>
+<p>El volumen conserva los datos al eliminar el contenedor. La publicación 127.0.0.1 limita la conexión al equipo local.</p>
+<table>
+<thead>
+<tr>
+<th>sudo docker volume create mongo_datos; sudo docker run -d --name mongo-aula -p 127.0.0.1:27017:27017 -v mongo_datos:/data/db mongo:8.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-3-comprobar-y-acceder-a-mongosh">Paso 3. Comprobar y acceder a mongosh</h3>
+<p>Para detener: sudo docker stop mongo-aula. Para volver a iniciar: sudo docker start mongo-aula. No ejecutes el contenedor a la vez que el servidor nativo en el mismo puerto 27017.</p>
+<table>
+<thead>
+<tr>
+<th>sudo docker ps; sudo docker exec -it mongo-aula mongosh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="practica-crear-y-consultar-una-base-de-datos">Práctica: crear y consultar una base de datos</h2>
+<p>Ejecuta estas instrucciones dentro de mongosh, ya sea con el Método A o el Método C.</p>
+<h3 id="paso-1-seleccionar-la-base-de-datos">Paso 1. Seleccionar la base de datos</h3>
+<p>La base se materializa cuando se guardan datos por primera vez.</p>
+<table>
+<thead>
+<tr>
+<th>use instituto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-2-insertar-dos-documentos">Paso 2. Insertar dos documentos</h3>
+<table>
+<thead>
+<tr>
+<th>db.estudiantes.insertMany([;   { nombre: "Ana", programa: "Sistemas", semestre: 1 },;   { nombre: "Luis", programa: "Sistemas", semestre: 2 }; ])</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-3-consultar-y-filtrar">Paso 3. Consultar y filtrar</h3>
+<table>
+<thead>
+<tr>
+<th>db.estudiantes.find(); db.estudiantes.find({ semestre: 1 })</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-4-actualizar-y-contar-documentos">Paso 4. Actualizar y contar documentos</h3>
+<p>Resultado esperado del conteo: 2, si no se han insertado más registros.</p>
+<table>
+<thead>
+<tr>
+<th>db.estudiantes.updateOne({ nombre: "Ana" }, { $set: { semestre: 2 } }); db.estudiantes.countDocuments({})</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paso-5-verificar-la-base-y-salir">Paso 5. Verificar la base y salir</h3>
+<table>
+<thead>
+<tr>
+<th>show dbs; show collections; exit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="errores-frecuentes-y-soluciones">Errores frecuentes y soluciones</h2>
+<table>
+<thead>
+<tr>
+<th>Mensaje / síntoma</th>
+<th>Causa probable</th>
+<th>Acción recomendada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unable to locate package mongodb-org</td>
+<td>Repositorio incorrecto o apt sin actualizar.</td>
+<td>Verifica noble/jammy y ejecuta sudo apt-get update.</td>
+</tr>
+<tr>
+<td>NO_PUBKEY / repositorio no firmado</td>
+<td>Falta la clave o no coincide.</td>
+<td>Repite la importación GPG; revisa la ruta signed-by.</td>
+</tr>
+<tr>
+<td>Unit mongod.service not found</td>
+<td>Servicio no registrado o instalación incompleta.</td>
+<td>sudo systemctl daemon-reload; confirma que mongodb-org esté instalado.</td>
+</tr>
+<tr>
+<td>Connection refused 127.0.0.1:27017</td>
+<td>Servidor detenido o puerto incorrecto.</td>
+<td>sudo systemctl status mongod; sudo systemctl start mongod.</td>
+</tr>
+<tr>
+<td>Address already in use</td>
+<td>El puerto 27017 está ocupado.</td>
+<td>Detén el contenedor o servicio duplicado; no uses ambos simultáneamente.</td>
+</tr>
+<tr>
+<td>Permission denied / fallo de arranque</td>
+<td>Permisos de archivos o configuración.</td>
+<td>Consulta sudo journalctl -u mongod -n 50; evita cambiar permisos a ciegas.</td>
+</tr>
+<tr>
+<td>Conflicto de paquetes dpkg</td>
+<td>Existe un paquete mongodb de Ubuntu incompatible.</td>
+<td>Revisa apt list --installed | grep mongo; respalda datos antes de desinstalar.</td>
+</tr>
+<tr>
+<td>Compass no conecta</td>
+<td>URI incorrecta o servidor apagado.</td>
+<td>Usa mongodb://localhost:27017 y verifica mongod o Docker.</td>
+</tr>
+</tbody>
+</table>
+<p>Para revisar registros del servicio:</p>
+<table>
+<thead>
+<tr>
+<th>sudo journalctl -u mongod -n 50 --no-pager</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="seguridad-y-buenas-practicas">Seguridad y buenas prácticas</h2>
+<ul>
+<li>Esta práctica es local. No expongas el puerto 27017 a Internet ni cambies bindIp a 0.0.0.0 sin diseñar autenticación, firewall y controles adecuados.</li>
+<li>En instalaciones de laboratorio locales, la autenticación puede no estar habilitada por defecto; no consideres seguro un servidor accesible desde otras máquinas.</li>
+<li>Utiliza únicamente repositorios y descargas oficiales; no ignores advertencias GPG.</li>
+<li>Evita sudo en mongosh para tareas normales; sudo se utiliza para administración del sistema.</li>
+<li>Antes de borrar paquetes, contenedores o volúmenes, realiza copia de seguridad de cualquier dato importante.</li>
+</ul>
+<h2 id="lista-de-verificacion">Lista de verificación</h2>
+<p>[ ] Identifiqué la versión de Ubuntu y su arquitectura.</p>
+<p>[ ] Configuré el repositorio oficial correspondiente.</p>
+<p>[ ] Instalé mongodb-org o ejecuté el contenedor Docker.</p>
+<p>[ ] Confirmé que MongoDB está activo.</p>
+<p>[ ] Me conecté con mongosh o Compass.</p>
+<p>[ ] Inserté y consulté documentos de prueba.</p>
+<p>[ ] Reconozco los errores comunes y las precauciones de seguridad.</p>
+<h2 id="conclusion-y-referencias">Conclusión y referencias</h2>
+<p>Al terminar, el estudiante dispone de una base de datos MongoDB local y conoce cómo iniciarla, comprobarla y administrar documentos básicos. La instalación mediante APT facilita comprender el servicio; Compass aporta una vista gráfica; Docker permite practicar en un entorno aislado.</p>
+<p>https://www.mongodb.com/docs/v8.0/tutorial/install-mongodb-on-ubuntu/</p>
+<p>https://www.mongodb.com/docs/v8.0/reference/installation-ubuntu-community-troubleshooting/</p>
+<p>https://www.mongodb.com/try/download/compass</p>
+<p>https://www.mongodb.com/docs/manual/administration/community-packages/</p>
+<p>https://docs.docker.com/engine/install/ubuntu/</p>
+<p>Aviso: comandos e imágenes ilustrativas revisados para fines didácticos; las pantallas y paquetes disponibles pueden cambiar. Comprueba la documentación oficial antes de instalar en otros sistemas o versiones.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
