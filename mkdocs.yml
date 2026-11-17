@@ -1,6 +1,6 @@
 site_name: Manuales de Bases de Datos
 site_description: Guías de instalación y primera práctica de MongoDB y MySQL en Ubuntu
-site_language: es
+
 nav:
   - Inicio: index.md
   - MongoDB (NoSQL): mongodb.md

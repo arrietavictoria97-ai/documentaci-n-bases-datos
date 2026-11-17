@@ -1,3 +1,5 @@
+> **Nota:** Las salidas de terminal son ejemplos didácticos, no capturas de una ejecución real. Los identificadores, versiones y tiempos pueden variar.
+
 # MongoDB en Ubuntu
 
 > Guía académica para estudiantes principiantes.
@@ -99,8 +101,20 @@ Alcance: equipos de laboratorio o aprendizaje con Ubuntu 22.04/24.04 LTS de 64 b
 La distribución debe indicar 22.04 o 24.04; la arquitectura habitual es x86_64 (amd64).
 
 
-| lsb_release -a; uname -m |
-| --- |
+```bash
+lsb_release -a; uname -m
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Ubuntu 24.04 LTS / x86_64 (ejemplo; puede mostrar 22.04).
+```
+
+**Cómo interpretarlo:** Confirma la versión y arquitectura antes de elegir el repositorio.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ## Conceptos esenciales
@@ -127,15 +141,40 @@ Método recomendado para aprender la instalación local. Los comandos siguientes
 Introduce la contraseña del usuario cuando Ubuntu la solicite; al escribirla no se muestran caracteres.
 
 
-| sudo apt-get update |
-| --- |
+```bash
+sudo apt-get update
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Reading package lists... Done
+```
+
+**Cómo interpretarlo:** Se actualizó el índice de paquetes sin errores.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 2. Instalar herramientas necesarias
 
 
-| sudo apt-get install -y gnupg curl |
-| --- |
+```bash
+sudo apt-get install -y gnupg curl
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Setting up gnupg ...
+Setting up curl ...
+```
+
+**Cómo interpretarlo:** Las herramientas quedaron instaladas; si ya existían, APT puede indicar que están actualizadas.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 3. Importar la clave de firma del repositorio
@@ -144,8 +183,21 @@ Introduce la contraseña del usuario cuando Ubuntu la solicite; al escribirla no
 La clave permite verificar los paquetes descargados. No ignores errores de firma.
 
 
-| curl -fsSL https://pgp.mongodb.com/server-8.0.asc \| \;   sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-8.0.gpg |
-| --- |
+```bash
+curl -fsSL https://pgp.mongodb.com/server-8.0.asc | \
+  sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-8.0.gpg
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+(Normalmente no muestra texto cuando termina correctamente.)
+```
+
+**Cómo interpretarlo:** Verifica la clave con: ls -l /usr/share/keyrings/mongodb-server-8.0.gpg
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 4. Registrar el repositorio oficial para Ubuntu 24.04
@@ -154,12 +206,36 @@ La clave permite verificar los paquetes descargados. No ignores errores de firma
 Si utilizas Ubuntu 22.04, usa el comando alternativo que aparece debajo; NO ejecutes ambos.
 
 
-| echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" \| sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list |
-| --- |
+```bash
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+deb [ arch=amd64,arm64 signed-by=... ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse
+```
+
+**Cómo interpretarlo:** Se registró el repositorio. En Ubuntu 22.04 debe aparecer jammy, no noble.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
 
 
-| echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" \| sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list |
-| --- |
+
+```bash
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+deb [ arch=amd64,arm64 signed-by=... ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse
+```
+
+**Cómo interpretarlo:** Se registró el repositorio. En Ubuntu 22.04 debe aparecer jammy, no noble.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 5. Actualizar repositorios e instalar MongoDB
@@ -168,15 +244,41 @@ Si utilizas Ubuntu 22.04, usa el comando alternativo que aparece debajo; NO ejec
 El paquete mongodb-org instala el servidor y los componentes oficiales, incluido mongosh según el empaquetado de MongoDB.
 
 
-| sudo apt-get update; sudo apt-get install -y mongodb-org |
-| --- |
+```bash
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Reading package lists... Done
+```
+
+**Cómo interpretarlo:** Se actualizó el índice de paquetes sin errores.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 6. Iniciar el servicio y habilitar el arranque automático
 
 
-| sudo systemctl start mongod; sudo systemctl enable mongod |
-| --- |
+```bash
+sudo systemctl start mongod
+sudo systemctl enable mongod
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Created symlink ... (puede aparecer solo al habilitar el servicio)
+```
+
+**Cómo interpretarlo:** El inicio puede no mostrar texto; verifica el estado en el paso siguiente.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 7. Comprobar que el servicio esté activo
@@ -185,8 +287,20 @@ El paquete mongodb-org instala el servidor y los componentes oficiales, incluido
 Debe aparecer “active (running)”. Pulsa la tecla q para salir de la vista de estado.
 
 
-| sudo systemctl status mongod |
-| --- |
+```bash
+sudo systemctl status mongod
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Active: active (running)
+```
+
+**Cómo interpretarlo:** El servidor MongoDB está ejecutándose.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 8. Abrir la consola y comprobar conexión
@@ -195,8 +309,11 @@ Debe aparecer “active (running)”. Pulsa la tecla q para salir de la vista de
 La segunda línea se ejecuta dentro de mongosh. Debe responder con ok: 1. Para salir escribe exit.
 
 
-| mongosh; db.runCommand({ ping: 1 }) |
-| --- |
+```bash
+mongosh
+# Dentro de mongosh:
+db.runCommand({ ping: 1 })
+```
 
 
 ![Ilustración del instructivo MongoDB en Ubuntu](assets/mongodb_3.png)
@@ -254,8 +371,20 @@ Este método crea un servidor MongoDB aislado en un contenedor. Requiere Docker 
 Si Docker no está instalado, sigue la guía oficial de Docker Engine para Ubuntu: https://docs.docker.com/engine/install/ubuntu/
 
 
-| docker --version; sudo docker info |
-| --- |
+```bash
+docker --version; sudo docker info
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Docker version XX.X.X
+```
+
+**Cómo interpretarlo:** Docker está instalado; el número depende del equipo.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 2. Descargar y ejecutar MongoDB 8.0
@@ -264,8 +393,21 @@ Si Docker no está instalado, sigue la guía oficial de Docker Engine para Ubunt
 El volumen conserva los datos al eliminar el contenedor. La publicación 127.0.0.1 limita la conexión al equipo local.
 
 
-| sudo docker volume create mongo_datos; sudo docker run -d --name mongo-aula -p 127.0.0.1:27017:27017 -v mongo_datos:/data/db mongo:8.0 |
-| --- |
+```bash
+sudo docker volume create mongo_datos; sudo docker run -d --name mongo-aula -p 127.0.0.1:27017:27017 -v mongo_datos:/data/db mongo:8.0
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+mongo_datos
+<identificador del contenedor>
+```
+
+**Cómo interpretarlo:** Se creó un volumen persistente y el contenedor arrancó.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 3. Comprobar y acceder a mongosh
@@ -274,8 +416,21 @@ El volumen conserva los datos al eliminar el contenedor. La publicación 127.0.0
 Para detener: sudo docker stop mongo-aula. Para volver a iniciar: sudo docker start mongo-aula. No ejecutes el contenedor a la vez que el servidor nativo en el mismo puerto 27017.
 
 
-| sudo docker ps; sudo docker exec -it mongo-aula mongosh |
-| --- |
+```bash
+sudo docker ps; sudo docker exec -it mongo-aula mongosh
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+CONTAINER ID   IMAGE       STATUS       PORTS
+...            mongo:8.0   Up ...       127.0.0.1:27017->27017/tcp
+```
+
+**Cómo interpretarlo:** MongoDB está activo dentro de Docker.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ## Práctica: crear y consultar una base de datos
@@ -290,22 +445,59 @@ Ejecuta estas instrucciones dentro de mongosh, ya sea con el Método A o el Mét
 La base se materializa cuando se guardan datos por primera vez.
 
 
-| use instituto |
-| --- |
+```bash
+use instituto
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+switched to db instituto
+```
+
+**Cómo interpretarlo:** La base se seleccionó; se guardará cuando se inserten documentos.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 2. Insertar dos documentos
 
 
-| db.estudiantes.insertMany([;   { nombre: "Ana", programa: "Sistemas", semestre: 1 },;   { nombre: "Luis", programa: "Sistemas", semestre: 2 }; ]) |
-| --- |
+```bash
+db.estudiantes.insertMany([;   { nombre: "Ana", programa: "Sistemas", semestre: 1 },;   { nombre: "Luis", programa: "Sistemas", semestre: 2 }; ])
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+{ acknowledged: true, insertedIds: { ... } }
+```
+
+**Cómo interpretarlo:** Se insertaron dos documentos.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 3. Consultar y filtrar
 
 
-| db.estudiantes.find(); db.estudiantes.find({ semestre: 1 }) |
-| --- |
+```bash
+db.estudiantes.find(); db.estudiantes.find({ semestre: 1 })
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+{ nombre: "Ana", programa: "Sistemas", semestre: 1 }
+{ nombre: "Luis", programa: "Sistemas", semestre: 2 }
+```
+
+**Cómo interpretarlo:** Se recuperaron los documentos; la consulta filtrada devuelve solo a Ana.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 4. Actualizar y contar documentos
@@ -314,22 +506,49 @@ La base se materializa cuando se guardan datos por primera vez.
 Resultado esperado del conteo: 2, si no se han insertado más registros.
 
 
-| db.estudiantes.updateOne({ nombre: "Ana" }, { $set: { semestre: 2 } }); db.estudiantes.countDocuments({}) |
-| --- |
+```bash
+db.estudiantes.updateOne({ nombre: "Ana" }, { $set: { semestre: 2 } }); db.estudiantes.countDocuments({})
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+{ acknowledged: true, matchedCount: 1, modifiedCount: 1 }
+2
+```
+
+**Cómo interpretarlo:** Se actualizó un documento y el conteo confirmó dos documentos.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ### Paso 5. Verificar la base y salir
 
 
-| show dbs; show collections; exit |
-| --- |
+```bash
+show dbs; show collections; exit
+```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+instituto ...
+show collections → estudiantes
+```
+
+**Cómo interpretarlo:** La base y su colección aparecen en el listado.
+
+**Si no coincide:** revisa el mensaje de error, la conexión y la sección de solución de problemas.
+
 
 
 ## Errores frecuentes y soluciones
 
 
-| Mensaje / síntoma | Causa probable | Acción recomendada |
-| --- | --- | --- |
+```bash
+Mensaje / síntoma | Causa probable | Acción recomendada
+``` --- | --- |
 | Unable to locate package mongodb-org | Repositorio incorrecto o apt sin actualizar. | Verifica noble/jammy y ejecuta sudo apt-get update. |
 | NO_PUBKEY / repositorio no firmado | Falta la clave o no coincide. | Repite la importación GPG; revisa la ruta signed-by. |
 | Unit mongod.service not found | Servicio no registrado o instalación incompleta. | sudo systemctl daemon-reload; confirma que mongodb-org esté instalado. |
@@ -343,8 +562,9 @@ Resultado esperado del conteo: 2, si no se han insertado más registros.
 Para revisar registros del servicio:
 
 
-| sudo journalctl -u mongod -n 50 --no-pager |
-| --- |
+```bash
+sudo journalctl -u mongod -n 50 --no-pager
+```
 
 
 ## Seguridad y buenas prácticas

@@ -1,6 +1,8 @@
+> **Nota:** Las salidas mostradas son ejemplos ilustrativos y pueden variar según la versión y el estado de los datos. No representan una instalación ejecutada en tu computador.
+
 # MySQL en Ubuntu
 
-> Guía académica para estudiantes:
+> Guía académica para estudiantes principiantes.
 
 
 INSTRUCTIVO DE INSTALACIÓN Y CREACIÓN DE LA PRIMERA BASE DE DATOS EN MySQL
@@ -14,11 +16,7 @@ Guía paso a paso: instalación mediante terminal, administración gráfica con 
 
 ![Ilustración del instructivo MySQL en Ubuntu](assets/mysql_1.png)
 
-
-Elaborado por: Victoria Arrieta
-
-
-Fecha:12/11/2026
+Presentado por Victoria Arrieta
 
 
 1. Introducción
@@ -57,9 +55,7 @@ Fecha:12/11/2026
 ## Introducción
 
 
-```bash
 MySQL es un sistema de gestión de bases de datos relacionales (RDBMS). Organiza la información en tablas con filas y columnas y utiliza SQL (Structured Query Language) para crear, consultar y modificar datos. A diferencia de MongoDB, MySQL es una base de datos SQL relacional. Esta guía permite instalar un servidor local y realizar una primera práctica sin experiencia avanzada.
-```
 
 
 ## Objetivo, propósito y alcance
@@ -114,6 +110,17 @@ Presiona Ctrl + Alt + T. Comprueba la versión del sistema.
 lsb_release -a
 ```
 
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Description: Ubuntu 24.04 LTS (ejemplo)
+```
+
+**Cómo interpretarlo:** Confirma que el sistema es Ubuntu 22.04 o 24.04.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
+
 
 Resultado esperado: Se muestra la versión de Ubuntu.
 
@@ -128,6 +135,17 @@ Actualiza la lista de software disponible antes de instalar.
 sudo apt update
 ```
 
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Reading package lists... Done
+```
+
+**Cómo interpretarlo:** La lista de paquetes se actualizó.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
+
 
 Resultado esperado: El comando finaliza sin errores de repositorios.
 
@@ -141,6 +159,17 @@ Instala el paquete distribuido por los repositorios configurados de Ubuntu.
 ```bash
 sudo apt install mysql-server -y
 ```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Setting up mysql-server ...
+```
+
+**Cómo interpretarlo:** APT instaló MySQL y sus dependencias.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
 
 
 Resultado esperado: APT instala el servidor y sus dependencias.
@@ -158,6 +187,17 @@ sudo systemctl start mysql
 sudo systemctl enable mysql
 ```
 
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Active: active (running)
+```
+
+**Cómo interpretarlo:** El servidor está funcionando; presiona q para salir de status.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
+
 
 Resultado esperado: El estado muestra active (running). Para salir de status, presiona q.
 
@@ -172,6 +212,17 @@ Verifica que el cliente de MySQL esté instalado.
 mysql --version
 ```
 
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+mysql  Ver 8.x ...
+```
+
+**Cómo interpretarlo:** Se reconoce el cliente; la versión exacta puede variar.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
+
 
 Resultado esperado: Aparece una versión de MySQL.
 
@@ -185,6 +236,18 @@ En instalaciones Ubuntu habituales, la cuenta root de MySQL utiliza autenticaci�
 ```bash
 sudo mysql
 ```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Welcome to the MySQL monitor.
+mysql>
+```
+
+**Cómo interpretarlo:** Entraste a la consola de MySQL.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
 
 
 Resultado esperado: Aparece el indicador mysql>. Si falla, revisa la sección de errores.
@@ -229,6 +292,17 @@ CREATE USER 'alumno'@'localhost' IDENTIFIED BY 'Cambia_Esta_Clave_2026!';
 GRANT ALL PRIVILEGES ON escuela_db.* TO 'alumno'@'localhost';
 ```
 
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Query OK, 0 rows affected
+```
+
+**Cómo interpretarlo:** Se creó el usuario; el permiso requiere que escuela_db ya exista.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
+
 
 Nota: el permiso sobre escuela_db puede configurarse antes de crearla; para conectar por TCP con 127.0.0.1, la coincidencia de host y método de autenticación puede requerir ajustes. Para principiantes, primero realiza la práctica desde la terminal.
 
@@ -245,6 +319,18 @@ docker run -d --name mysql-lab -e MYSQL_ROOT_PASSWORD='ClaveTemporalSegura_2026!
 docker logs mysql-lab
 docker exec -it mysql-lab mysql -uroot -p
 ```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+mysql_lab_data
+<identificador del contenedor>
+```
+
+**Cómo interpretarlo:** Se creó el volumen y arrancó el contenedor; espera a que termine la inicialización.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
 
 
 Al solicitar la contraseña, escribe la definida en MYSQL_ROOT_PASSWORD. Espera a que el registro del contenedor indique que está listo. Se usa el puerto 3307 del equipo para evitar conflictos con una instalación local.
@@ -268,6 +354,19 @@ SHOW DATABASES;
 USE escuela_db;
 ```
 
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Query OK, 1 row affected
+...
+escuela_db
+```
+
+**Cómo interpretarlo:** La base existe y aparece al consultar SHOW DATABASES.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
+
 
 Resultado esperado: escuela_db aparece entre las bases de datos.
 
@@ -288,6 +387,19 @@ CREATE TABLE IF NOT EXISTS estudiantes (
 SHOW TABLES;
 ```
 
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Query OK, 0 rows affected
+Tables_in_escuela_db
+estudiantes
+```
+
+**Cómo interpretarlo:** Se creó la tabla y aparece en SHOW TABLES.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
+
 
 Resultado esperado: Se muestra la tabla estudiantes.
 
@@ -295,9 +407,7 @@ Resultado esperado: Se muestra la tabla estudiantes.
 ### Paso 11. Insertar tres registros
 
 
-```sql
 INSERT INTO agrega datos de ejemplo.
-```
 
 
 ```sql
@@ -307,6 +417,17 @@ INSERT INTO estudiantes (nombre, programa, edad) VALUES
 ('Sara Gomez', 'Bases de Datos', 21);
 ```
 
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+Query OK, 3 rows affected
+```
+
+**Cómo interpretarlo:** Se agregaron tres registros.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
+
 
 Resultado esperado: El servidor confirma tres filas insertadas.
 
@@ -314,9 +435,7 @@ Resultado esperado: El servidor confirma tres filas insertadas.
 ### Paso 12. Consultar y filtrar registros
 
 
-```sql
 SELECT permite visualizar los datos. WHERE filtra los resultados.
-```
 
 
 ```sql
@@ -324,6 +443,20 @@ SELECT * FROM estudiantes;
 SELECT nombre, programa FROM estudiantes WHERE edad >= 21;
 SELECT COUNT(*) AS total FROM estudiantes;
 ```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+1 | Ana Ruiz   | Soporte de Sistemas | 20
+2 | Luis Perez | Desarrollo Web      | 22
+3 | Sara Gomez | Bases de Datos      | 21
+total: 3
+```
+
+**Cómo interpretarlo:** Los datos se recuperaron; la consulta filtrada muestra los estudiantes con edad >= 21.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
 
 
 Resultado esperado: Se observan tres registros y total = 3 (si no se ejecutó antes la inserción).
@@ -340,6 +473,20 @@ UPDATE estudiantes SET edad = 23 WHERE nombre = 'Luis Perez';
 DELETE FROM estudiantes WHERE nombre = 'Sara Gomez';
 SELECT * FROM estudiantes;
 ```
+
+**Resultado esperado (ejemplo ilustrativo):**
+
+```text
+1 | Ana Ruiz   | Soporte de Sistemas | 20
+2 | Luis Perez | Desarrollo Web      | 22
+3 | Sara Gomez | Bases de Datos      | 21
+total: 3
+```
+
+**Cómo interpretarlo:** Los datos se recuperaron; la consulta filtrada muestra los estudiantes con edad >= 21.
+
+**Si aparece un error:** detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.
+
 
 
 Resultado esperado: Quedan dos registros. Puedes repetir la práctica recreando la tabla.
@@ -419,22 +566,16 @@ Conclusión: el estudiante instaló un motor relacional, distinguió servidor y 
 ## Referencias y recursos oficiales
 
 
-```bash
 MySQL Reference Manual: https://dev.mysql.com/doc/refman/8.4/en/
-```
 
 
-```bash
 MySQL Workbench: https://dev.mysql.com/doc/workbench/en/
-```
 
 
 Ubuntu Server – MySQL: https://documentation.ubuntu.com/server/how-to/databases/install-mysql/
 
 
-```bash
 Docker Official Image mysql: https://hub.docker.com/_/mysql
-```
 
 
 Nota editorial: diagramas originales ilustrativos; no son capturas de pantalla de una ejecución real. Los nombres y registros de ejemplo son ficticios.
