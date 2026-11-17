@@ -1184,6 +1184,9 @@
 
 
 
+<blockquote>
+<p><strong>Nota:</strong> Las salidas de terminal son ejemplos didácticos, no capturas de una ejecución real. Los identificadores, versiones y tiempos pueden variar.</p>
+</blockquote>
 <h1 id="mongodb-en-ubuntu">MongoDB en Ubuntu</h1>
 <blockquote>
 <p>Guía académica para estudiantes principiantes.</p>
@@ -1252,18 +1255,13 @@ DE MONGODB EN UBUNTU</p>
 </ul>
 <h3 id="comprobar-version-y-arquitectura">Comprobar versión y arquitectura</h3>
 <p>La distribución debe indicar 22.04 o 24.04; la arquitectura habitual es x86_64 (amd64).</p>
-<table>
-<thead>
-<tr>
-<th>lsb_release -a; uname -m</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>lsb_release<span class="w"> </span>-a<span class="p">;</span><span class="w"> </span>uname<span class="w"> </span>-m
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Ubuntu 24.04 LTS / x86_64 (ejemplo; puede mostrar 22.04).
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Confirma la versión y arquitectura antes de elegir el repositorio.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h2 id="conceptos-esenciales">Conceptos esenciales</h2>
 <p>mongod: proceso servidor que almacena datos. mongosh: consola interactiva para consultar y modificar datos. MongoDB Compass: aplicación gráfica para explorar bases y colecciones. APT: gestor de paquetes de Ubuntu. Docker: sistema para ejecutar MongoDB dentro de un contenedor.</p>
 <p><img alt="Ilustración del instructivo MongoDB en Ubuntu" src="../assets/mongodb_2.png" /></p>
@@ -1272,126 +1270,82 @@ DE MONGODB EN UBUNTU</p>
 <p>Método recomendado para aprender la instalación local. Los comandos siguientes utilizan el repositorio oficial de MongoDB 8.0. Ejecútalos en la terminal de Ubuntu, no dentro de mongosh.</p>
 <h3 id="paso-1-actualizar-el-indice-de-paquetes">Paso 1. Actualizar el índice de paquetes</h3>
 <p>Introduce la contraseña del usuario cuando Ubuntu la solicite; al escribirla no se muestran caracteres.</p>
-<table>
-<thead>
-<tr>
-<th>sudo apt-get update</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Reading package lists... Done
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se actualizó el índice de paquetes sin errores.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-2-instalar-herramientas-necesarias">Paso 2. Instalar herramientas necesarias</h3>
-<table>
-<thead>
-<tr>
-<th>sudo apt-get install -y gnupg curl</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>gnupg<span class="w"> </span>curl
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Setting up gnupg ...
+Setting up curl ...
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Las herramientas quedaron instaladas; si ya existían, APT puede indicar que están actualizadas.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-3-importar-la-clave-de-firma-del-repositorio">Paso 3. Importar la clave de firma del repositorio</h3>
 <p>La clave permite verificar los paquetes descargados. No ignores errores de firma.</p>
-<table>
-<thead>
-<tr>
-<th>curl -fsSL https://pgp.mongodb.com/server-8.0.asc | \;   sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-8.0.gpg</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://pgp.mongodb.com/server-8.0.asc<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/mongodb-server-8.0.gpg
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>(Normalmente no muestra texto cuando termina correctamente.)
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Verifica la clave con: ls -l /usr/share/keyrings/mongodb-server-8.0.gpg</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-4-registrar-el-repositorio-oficial-para-ubuntu-2404">Paso 4. Registrar el repositorio oficial para Ubuntu 24.04</h3>
 <p>Si utilizas Ubuntu 22.04, usa el comando alternativo que aparece debajo; NO ejecutes ambos.</p>
-<table>
-<thead>
-<tr>
-<th>echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/mongodb-org-8.0.list
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>deb [ arch=amd64,arm64 signed-by=... ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se registró el repositorio. En Ubuntu 22.04 debe aparecer jammy, no noble.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/mongodb-org-8.0.list
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>deb [ arch=amd64,arm64 signed-by=... ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se registró el repositorio. En Ubuntu 22.04 debe aparecer jammy, no noble.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-5-actualizar-repositorios-e-instalar-mongodb">Paso 5. Actualizar repositorios e instalar MongoDB</h3>
 <p>El paquete mongodb-org instala el servidor y los componentes oficiales, incluido mongosh según el empaquetado de MongoDB.</p>
-<table>
-<thead>
-<tr>
-<th>sudo apt-get update; sudo apt-get install -y mongodb-org</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>mongodb-org
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Reading package lists... Done
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se actualizó el índice de paquetes sin errores.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-6-iniciar-el-servicio-y-habilitar-el-arranque-automatico">Paso 6. Iniciar el servicio y habilitar el arranque automático</h3>
-<table>
-<thead>
-<tr>
-<th>sudo systemctl start mongod; sudo systemctl enable mongod</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mongod
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>mongod
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Created symlink ... (puede aparecer solo al habilitar el servicio)
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> El inicio puede no mostrar texto; verifica el estado en el paso siguiente.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-7-comprobar-que-el-servicio-este-activo">Paso 7. Comprobar que el servicio esté activo</h3>
 <p>Debe aparecer “active (running)”. Pulsa la tecla q para salir de la vista de estado.</p>
-<table>
-<thead>
-<tr>
-<th>sudo systemctl status mongod</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mongod
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Active: active (running)
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> El servidor MongoDB está ejecutándose.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-8-abrir-la-consola-y-comprobar-conexion">Paso 8. Abrir la consola y comprobar conexión</h3>
 <p>La segunda línea se ejecuta dentro de mongosh. Debe responder con ok: 1. Para salir escribe exit.</p>
-<table>
-<thead>
-<tr>
-<th>mongosh; db.runCommand({ ping: 1 })</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>mongosh
+<span class="c1"># Dentro de mongosh:</span>
+db.runCommand<span class="o">({</span><span class="w"> </span>ping:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">})</span>
+</code></pre></div>
 <p><img alt="Ilustración del instructivo MongoDB en Ubuntu" src="../assets/mongodb_3.png" /></p>
 <p>Figura 3. Ejemplo ilustrativo de resultados correctos; no es una captura real.</p>
 <h2 id="metodo-b-interfaz-grafica-mongodb-compass">Método B: interfaz gráfica MongoDB Compass</h2>
@@ -1421,180 +1375,99 @@ DE MONGODB EN UBUNTU</p>
 <p>Este método crea un servidor MongoDB aislado en un contenedor. Requiere Docker Engine previamente instalado; no es una instalación nativa de MongoDB en Ubuntu.</p>
 <h3 id="paso-1-confirmar-docker">Paso 1. Confirmar Docker</h3>
 <p>Si Docker no está instalado, sigue la guía oficial de Docker Engine para Ubuntu: https://docs.docker.com/engine/install/ubuntu/</p>
-<table>
-<thead>
-<tr>
-<th>docker --version; sudo docker info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>--version<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>docker<span class="w"> </span>info
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Docker version XX.X.X
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Docker está instalado; el número depende del equipo.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-2-descargar-y-ejecutar-mongodb-80">Paso 2. Descargar y ejecutar MongoDB 8.0</h3>
 <p>El volumen conserva los datos al eliminar el contenedor. La publicación 127.0.0.1 limita la conexión al equipo local.</p>
-<table>
-<thead>
-<tr>
-<th>sudo docker volume create mongo_datos; sudo docker run -d --name mongo-aula -p 127.0.0.1:27017:27017 -v mongo_datos:/data/db mongo:8.0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>mongo_datos<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>mongo-aula<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:27017:27017<span class="w"> </span>-v<span class="w"> </span>mongo_datos:/data/db<span class="w"> </span>mongo:8.0
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>mongo_datos
+&lt;identificador del contenedor&gt;
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se creó un volumen persistente y el contenedor arrancó.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-3-comprobar-y-acceder-a-mongosh">Paso 3. Comprobar y acceder a mongosh</h3>
 <p>Para detener: sudo docker stop mongo-aula. Para volver a iniciar: sudo docker start mongo-aula. No ejecutes el contenedor a la vez que el servidor nativo en el mismo puerto 27017.</p>
-<table>
-<thead>
-<tr>
-<th>sudo docker ps; sudo docker exec -it mongo-aula mongosh</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>docker<span class="w"> </span>ps<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>mongo-aula<span class="w"> </span>mongosh
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>CONTAINER ID   IMAGE       STATUS       PORTS
+...            mongo:8.0   Up ...       127.0.0.1:27017-&gt;27017/tcp
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> MongoDB está activo dentro de Docker.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h2 id="practica-crear-y-consultar-una-base-de-datos">Práctica: crear y consultar una base de datos</h2>
 <p>Ejecuta estas instrucciones dentro de mongosh, ya sea con el Método A o el Método C.</p>
 <h3 id="paso-1-seleccionar-la-base-de-datos">Paso 1. Seleccionar la base de datos</h3>
 <p>La base se materializa cuando se guardan datos por primera vez.</p>
-<table>
-<thead>
-<tr>
-<th>use instituto</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>use<span class="w"> </span>instituto
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>switched to db instituto
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> La base se seleccionó; se guardará cuando se inserten documentos.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-2-insertar-dos-documentos">Paso 2. Insertar dos documentos</h3>
-<table>
-<thead>
-<tr>
-<th>db.estudiantes.insertMany([;   { nombre: "Ana", programa: "Sistemas", semestre: 1 },;   { nombre: "Luis", programa: "Sistemas", semestre: 2 }; ])</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>db.estudiantes.insertMany<span class="o">([</span><span class="p">;</span><span class="w">   </span><span class="o">{</span><span class="w"> </span>nombre:<span class="w"> </span><span class="s2">"Ana"</span>,<span class="w"> </span>programa:<span class="w"> </span><span class="s2">"Sistemas"</span>,<span class="w"> </span>semestre:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">}</span>,<span class="p">;</span><span class="w">   </span><span class="o">{</span><span class="w"> </span>nombre:<span class="w"> </span><span class="s2">"Luis"</span>,<span class="w"> </span>programa:<span class="w"> </span><span class="s2">"Sistemas"</span>,<span class="w"> </span>semestre:<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">}</span><span class="p">;</span><span class="w"> </span><span class="o">])</span>
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>{ acknowledged: true, insertedIds: { ... } }
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se insertaron dos documentos.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-3-consultar-y-filtrar">Paso 3. Consultar y filtrar</h3>
-<table>
-<thead>
-<tr>
-<th>db.estudiantes.find(); db.estudiantes.find({ semestre: 1 })</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>db.estudiantes.find<span class="o">()</span><span class="p">;</span><span class="w"> </span>db.estudiantes.find<span class="o">({</span><span class="w"> </span>semestre:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">})</span>
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>{ nombre: "Ana", programa: "Sistemas", semestre: 1 }
+{ nombre: "Luis", programa: "Sistemas", semestre: 2 }
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se recuperaron los documentos; la consulta filtrada devuelve solo a Ana.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-4-actualizar-y-contar-documentos">Paso 4. Actualizar y contar documentos</h3>
 <p>Resultado esperado del conteo: 2, si no se han insertado más registros.</p>
-<table>
-<thead>
-<tr>
-<th>db.estudiantes.updateOne({ nombre: "Ana" }, { $set: { semestre: 2 } }); db.estudiantes.countDocuments({})</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>db.estudiantes.updateOne<span class="o">({</span><span class="w"> </span>nombre:<span class="w"> </span><span class="s2">"Ana"</span><span class="w"> </span><span class="o">}</span>,<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">$set</span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span>semestre:<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">})</span><span class="p">;</span><span class="w"> </span>db.estudiantes.countDocuments<span class="o">({})</span>
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>{ acknowledged: true, matchedCount: 1, modifiedCount: 1 }
+2
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se actualizó un documento y el conteo confirmó dos documentos.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h3 id="paso-5-verificar-la-base-y-salir">Paso 5. Verificar la base y salir</h3>
-<table>
-<thead>
-<tr>
-<th>show dbs; show collections; exit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>show<span class="w"> </span>dbs<span class="p">;</span><span class="w"> </span>show<span class="w"> </span>collections<span class="p">;</span><span class="w"> </span><span class="nb">exit</span>
+</code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>instituto ...
+show collections → estudiantes
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> La base y su colección aparecen en el listado.</p>
+<p><strong>Si no coincide:</strong> revisa el mensaje de error, la conexión y la sección de solución de problemas.</p>
 <h2 id="errores-frecuentes-y-soluciones">Errores frecuentes y soluciones</h2>
-<table>
-<thead>
-<tr>
-<th>Mensaje / síntoma</th>
-<th>Causa probable</th>
-<th>Acción recomendada</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Unable to locate package mongodb-org</td>
-<td>Repositorio incorrecto o apt sin actualizar.</td>
-<td>Verifica noble/jammy y ejecuta sudo apt-get update.</td>
-</tr>
-<tr>
-<td>NO_PUBKEY / repositorio no firmado</td>
-<td>Falta la clave o no coincide.</td>
-<td>Repite la importación GPG; revisa la ruta signed-by.</td>
-</tr>
-<tr>
-<td>Unit mongod.service not found</td>
-<td>Servicio no registrado o instalación incompleta.</td>
-<td>sudo systemctl daemon-reload; confirma que mongodb-org esté instalado.</td>
-</tr>
-<tr>
-<td>Connection refused 127.0.0.1:27017</td>
-<td>Servidor detenido o puerto incorrecto.</td>
-<td>sudo systemctl status mongod; sudo systemctl start mongod.</td>
-</tr>
-<tr>
-<td>Address already in use</td>
-<td>El puerto 27017 está ocupado.</td>
-<td>Detén el contenedor o servicio duplicado; no uses ambos simultáneamente.</td>
-</tr>
-<tr>
-<td>Permission denied / fallo de arranque</td>
-<td>Permisos de archivos o configuración.</td>
-<td>Consulta sudo journalctl -u mongod -n 50; evita cambiar permisos a ciegas.</td>
-</tr>
-<tr>
-<td>Conflicto de paquetes dpkg</td>
-<td>Existe un paquete mongodb de Ubuntu incompatible.</td>
-<td>Revisa apt list --installed | grep mongo; respalda datos antes de desinstalar.</td>
-</tr>
-<tr>
-<td>Compass no conecta</td>
-<td>URI incorrecta o servidor apagado.</td>
-<td>Usa mongodb://localhost:27017 y verifica mongod o Docker.</td>
-</tr>
-</tbody>
-</table>
-<p>Para revisar registros del servicio:</p>
-<table>
-<thead>
-<tr>
-<th>sudo journalctl -u mongod -n 50 --no-pager</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code>Mensaje<span class="w"> </span>/<span class="w"> </span>síntoma<span class="w"> </span><span class="p">|</span><span class="w"> </span>Causa<span class="w"> </span>probable<span class="w"> </span><span class="p">|</span><span class="w"> </span>Acción<span class="w"> </span>recomendada
+<span class="sb">```</span><span class="w"> </span>---<span class="w"> </span><span class="p">|</span><span class="w"> </span>---<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>Unable<span class="w"> </span>to<span class="w"> </span>locate<span class="w"> </span>package<span class="w"> </span>mongodb-org<span class="w"> </span><span class="p">|</span><span class="w"> </span>Repositorio<span class="w"> </span>incorrecto<span class="w"> </span>o<span class="w"> </span>apt<span class="w"> </span>sin<span class="w"> </span>actualizar.<span class="w"> </span><span class="p">|</span><span class="w"> </span>Verifica<span class="w"> </span>noble/jammy<span class="w"> </span>y<span class="w"> </span>ejecuta<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>NO_PUBKEY<span class="w"> </span>/<span class="w"> </span>repositorio<span class="w"> </span>no<span class="w"> </span>firmado<span class="w"> </span><span class="p">|</span><span class="w"> </span>Falta<span class="w"> </span>la<span class="w"> </span>clave<span class="w"> </span>o<span class="w"> </span>no<span class="w"> </span>coincide.<span class="w"> </span><span class="p">|</span><span class="w"> </span>Repite<span class="w"> </span>la<span class="w"> </span>importación<span class="w"> </span>GPG<span class="p">;</span><span class="w"> </span>revisa<span class="w"> </span>la<span class="w"> </span>ruta<span class="w"> </span>signed-by.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>Unit<span class="w"> </span>mongod.service<span class="w"> </span>not<span class="w"> </span>found<span class="w"> </span><span class="p">|</span><span class="w"> </span>Servicio<span class="w"> </span>no<span class="w"> </span>registrado<span class="w"> </span>o<span class="w"> </span>instalación<span class="w"> </span>incompleta.<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload<span class="p">;</span><span class="w"> </span>confirma<span class="w"> </span>que<span class="w"> </span>mongodb-org<span class="w"> </span>esté<span class="w"> </span>instalado.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>Connection<span class="w"> </span>refused<span class="w"> </span><span class="m">127</span>.0.0.1:27017<span class="w"> </span><span class="p">|</span><span class="w"> </span>Servidor<span class="w"> </span>detenido<span class="w"> </span>o<span class="w"> </span>puerto<span class="w"> </span>incorrecto.<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mongod<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mongod.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>Address<span class="w"> </span>already<span class="w"> </span><span class="k">in</span><span class="w"> </span>use<span class="w"> </span><span class="p">|</span><span class="w"> </span>El<span class="w"> </span>puerto<span class="w"> </span><span class="m">27017</span><span class="w"> </span>está<span class="w"> </span>ocupado.<span class="w"> </span><span class="p">|</span><span class="w"> </span>Detén<span class="w"> </span>el<span class="w"> </span>contenedor<span class="w"> </span>o<span class="w"> </span>servicio<span class="w"> </span>duplicado<span class="p">;</span><span class="w"> </span>no<span class="w"> </span>uses<span class="w"> </span>ambos<span class="w"> </span>simultáneamente.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>Permission<span class="w"> </span>denied<span class="w"> </span>/<span class="w"> </span>fallo<span class="w"> </span>de<span class="w"> </span>arranque<span class="w"> </span><span class="p">|</span><span class="w"> </span>Permisos<span class="w"> </span>de<span class="w"> </span>archivos<span class="w"> </span>o<span class="w"> </span>configuración.<span class="w"> </span><span class="p">|</span><span class="w"> </span>Consulta<span class="w"> </span>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>mongod<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="p">;</span><span class="w"> </span>evita<span class="w"> </span>cambiar<span class="w"> </span>permisos<span class="w"> </span>a<span class="w"> </span>ciegas.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>Conflicto<span class="w"> </span>de<span class="w"> </span>paquetes<span class="w"> </span>dpkg<span class="w"> </span><span class="p">|</span><span class="w"> </span>Existe<span class="w"> </span>un<span class="w"> </span>paquete<span class="w"> </span>mongodb<span class="w"> </span>de<span class="w"> </span>Ubuntu<span class="w"> </span>incompatible.<span class="w"> </span><span class="p">|</span><span class="w"> </span>Revisa<span class="w"> </span>apt<span class="w"> </span>list<span class="w"> </span>--installed<span class="w"> </span><span class="se">\|</span><span class="w"> </span>grep<span class="w"> </span>mongo<span class="p">;</span><span class="w"> </span>respalda<span class="w"> </span>datos<span class="w"> </span>antes<span class="w"> </span>de<span class="w"> </span>desinstalar.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>Compass<span class="w"> </span>no<span class="w"> </span>conecta<span class="w"> </span><span class="p">|</span><span class="w"> </span>URI<span class="w"> </span>incorrecta<span class="w"> </span>o<span class="w"> </span>servidor<span class="w"> </span>apagado.<span class="w"> </span><span class="p">|</span><span class="w"> </span>Usa<span class="w"> </span>mongodb://localhost:27017<span class="w"> </span>y<span class="w"> </span>verifica<span class="w"> </span>mongod<span class="w"> </span>o<span class="w"> </span>Docker.<span class="w"> </span><span class="p">|</span>
+
+
+Para<span class="w"> </span>revisar<span class="w"> </span>registros<span class="w"> </span>del<span class="w"> </span>servicio:
+
+
+<span class="sb">```</span>bash
+sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>mongod<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>--no-pager
+</code></pre></div>
 <h2 id="seguridad-y-buenas-practicas">Seguridad y buenas prácticas</h2>
 <ul>
 <li>Esta práctica es local. No expongas el puerto 27017 a Internet ni cambies bindIp a 0.0.0.0 sin diseñar autenticación, firewall y controles adecuados.</li>

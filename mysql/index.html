@@ -982,16 +982,18 @@
 
 
 
+<blockquote>
+<p><strong>Nota:</strong> Las salidas mostradas son ejemplos ilustrativos y pueden variar según la versión y el estado de los datos. No representan una instalación ejecutada en tu computador.</p>
+</blockquote>
 <h1 id="mysql-en-ubuntu">MySQL en Ubuntu</h1>
 <blockquote>
-<p>Guía académica para estudiantes:</p>
+<p>Guía académica para estudiantes principiantes.</p>
 </blockquote>
 <p>INSTRUCTIVO DE INSTALACIÓN Y CREACIÓN DE LA PRIMERA BASE DE DATOS EN MySQL</p>
 <p>Ubuntu 22.04 / 24.04 LTS · Nivel principiante</p>
 <p>Guía paso a paso: instalación mediante terminal, administración gráfica con MySQL Workbench y alternativa con Docker.</p>
 <p><img alt="Ilustración del instructivo MySQL en Ubuntu" src="../assets/mysql_1.png" /></p>
-<p>Elaborado por: Victoria Arrieta</p>
-<p>Fecha:12/11/2026</p>
+<p>Presentado por Victoria Arrieta</p>
 <ol>
 <li>
 <p>Introducción</p>
@@ -1028,8 +1030,7 @@
 </li>
 </ol>
 <h2 id="introduccion">Introducción</h2>
-<div class="highlight"><pre><span></span><code>MySQL<span class="w"> </span>es<span class="w"> </span>un<span class="w"> </span>sistema<span class="w"> </span>de<span class="w"> </span>gestión<span class="w"> </span>de<span class="w"> </span>bases<span class="w"> </span>de<span class="w"> </span>datos<span class="w"> </span>relacionales<span class="w"> </span><span class="o">(</span>RDBMS<span class="o">)</span>.<span class="w"> </span>Organiza<span class="w"> </span>la<span class="w"> </span>información<span class="w"> </span>en<span class="w"> </span>tablas<span class="w"> </span>con<span class="w"> </span>filas<span class="w"> </span>y<span class="w"> </span>columnas<span class="w"> </span>y<span class="w"> </span>utiliza<span class="w"> </span>SQL<span class="w"> </span><span class="o">(</span>Structured<span class="w"> </span>Query<span class="w"> </span>Language<span class="o">)</span><span class="w"> </span>para<span class="w"> </span>crear,<span class="w"> </span>consultar<span class="w"> </span>y<span class="w"> </span>modificar<span class="w"> </span>datos.<span class="w"> </span>A<span class="w"> </span>diferencia<span class="w"> </span>de<span class="w"> </span>MongoDB,<span class="w"> </span>MySQL<span class="w"> </span>es<span class="w"> </span>una<span class="w"> </span>base<span class="w"> </span>de<span class="w"> </span>datos<span class="w"> </span>SQL<span class="w"> </span>relacional.<span class="w"> </span>Esta<span class="w"> </span>guía<span class="w"> </span>permite<span class="w"> </span>instalar<span class="w"> </span>un<span class="w"> </span>servidor<span class="w"> </span><span class="nb">local</span><span class="w"> </span>y<span class="w"> </span>realizar<span class="w"> </span>una<span class="w"> </span>primera<span class="w"> </span>práctica<span class="w"> </span>sin<span class="w"> </span>experiencia<span class="w"> </span>avanzada.
-</code></pre></div>
+<p>MySQL es un sistema de gestión de bases de datos relacionales (RDBMS). Organiza la información en tablas con filas y columnas y utiliza SQL (Structured Query Language) para crear, consultar y modificar datos. A diferencia de MongoDB, MySQL es una base de datos SQL relacional. Esta guía permite instalar un servidor local y realizar una primera práctica sin experiencia avanzada.</p>
 <h2 id="objetivo-proposito-y-alcance">Objetivo, propósito y alcance</h2>
 <p>Objetivo: instalar y verificar MySQL en Ubuntu, crear una base de datos y una tabla, insertar registros y realizar consultas SQL básicas.</p>
 <p>Propósito: ofrecer un procedimiento reproducible y didáctico para estudiantes de fundamentos de bases de datos.</p>
@@ -1075,16 +1076,31 @@
 <p>Presiona Ctrl + Alt + T. Comprueba la versión del sistema.</p>
 <div class="highlight"><pre><span></span><code>lsb_release<span class="w"> </span>-a
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Description: Ubuntu 24.04 LTS (ejemplo)
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Confirma que el sistema es Ubuntu 22.04 o 24.04.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Resultado esperado: Se muestra la versión de Ubuntu.</p>
 <h3 id="paso-2-actualizar-el-indice-de-paquetes">Paso 2. Actualizar el índice de paquetes</h3>
 <p>Actualiza la lista de software disponible antes de instalar.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Reading package lists... Done
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> La lista de paquetes se actualizó.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Resultado esperado: El comando finaliza sin errores de repositorios.</p>
 <h3 id="paso-3-instalar-el-servidor-mysql">Paso 3. Instalar el servidor MySQL</h3>
 <p>Instala el paquete distribuido por los repositorios configurados de Ubuntu.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mysql-server<span class="w"> </span>-y
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Setting up mysql-server ...
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> APT instaló MySQL y sus dependencias.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Resultado esperado: APT instala el servidor y sus dependencias.</p>
 <h3 id="paso-4-verificar-el-servicio">Paso 4. Verificar el servicio</h3>
 <p>Consulta el estado del servicio. Si no está activo, inícialo.</p>
@@ -1092,16 +1108,32 @@
 sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>mysql
 sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>mysql
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Active: active (running)
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> El servidor está funcionando; presiona q para salir de status.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Resultado esperado: El estado muestra active (running). Para salir de status, presiona q.</p>
 <h3 id="paso-5-comprobar-la-version">Paso 5. Comprobar la versión</h3>
 <p>Verifica que el cliente de MySQL esté instalado.</p>
 <div class="highlight"><pre><span></span><code>mysql<span class="w"> </span>--version
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>mysql  Ver 8.x ...
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se reconoce el cliente; la versión exacta puede variar.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Resultado esperado: Aparece una versión de MySQL.</p>
 <h3 id="paso-6-ingresar-como-administrador-local">Paso 6. Ingresar como administrador local</h3>
 <p>En instalaciones Ubuntu habituales, la cuenta root de MySQL utiliza autenticación mediante socket de Unix. Accede desde el sistema con sudo.</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mysql
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Welcome to the MySQL monitor.
+mysql&gt;
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Entraste a la consola de MySQL.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Resultado esperado: Aparece el indicador mysql&gt;. Si falla, revisa la sección de errores.</p>
 <p>ADVERTENCIA: No cambies a contraseñas débiles ni habilites acceso remoto de root para resolver problemas. En un laboratorio local es preferible conservar el método de autenticación predeterminado.</p>
 <h2 id="interfaz-grafica-mysql-workbench">Interfaz gráfica: MySQL Workbench</h2>
@@ -1118,6 +1150,11 @@ sudo apt install mysql-workbench</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'alumno'</span><span class="o">@</span><span class="s1">'localhost'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'Cambia_Esta_Clave_2026!'</span><span class="p">;</span>
 <span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">escuela_db</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'alumno'</span><span class="o">@</span><span class="s1">'localhost'</span><span class="p">;</span>
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Query OK, 0 rows affected
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se creó el usuario; el permiso requiere que escuela_db ya exista.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Nota: el permiso sobre escuela_db puede configurarse antes de crearla; para conectar por TCP con 127.0.0.1, la coincidencia de host y método de autenticación puede requerir ajustes. Para principiantes, primero realiza la práctica desde la terminal.</p>
 <h2 id="alternativa-mediante-docker-opcional">Alternativa mediante Docker (opcional)</h2>
 <p>Este método ejecuta MySQL dentro de un contenedor; no es necesario si ya utilizas la instalación por APT. Requiere Docker Engine funcionando. No ejecutes ambos servidores en el mismo puerto 3306.</p>
@@ -1126,6 +1163,12 @@ docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </sp
 docker<span class="w"> </span>logs<span class="w"> </span>mysql-lab
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>mysql-lab<span class="w"> </span>mysql<span class="w"> </span>-uroot<span class="w"> </span>-p
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>mysql_lab_data
+&lt;identificador del contenedor&gt;
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se creó el volumen y arrancó el contenedor; espera a que termine la inicialización.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Al solicitar la contraseña, escribe la definida en MYSQL_ROOT_PASSWORD. Espera a que el registro del contenedor indique que está listo. Se usa el puerto 3307 del equipo para evitar conflictos con una instalación local.</p>
 <h2 id="crear-la-primera-base-de-datos-y-ejecutar-sql">Crear la primera base de datos y ejecutar SQL</h2>
 <p>Entra con sudo mysql (instalación APT) o desde el cliente del contenedor. Ejecuta las sentencias siguientes una a una. Cada instrucción SQL termina en punto y coma (;).</p>
@@ -1135,6 +1178,13 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
 <span class="n">USE</span><span class="w"> </span><span class="n">escuela_db</span><span class="p">;</span>
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Query OK, 1 row affected
+...
+escuela_db
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> La base existe y aparece al consultar SHOW DATABASES.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Resultado esperado: escuela_db aparece entre las bases de datos.</p>
 <h3 id="paso-10-crear-la-tabla-estudiantes">Paso 10. Crear la tabla estudiantes</h3>
 <p>Define un identificador único y columnas de nombre, programa y edad.</p>
@@ -1146,23 +1196,41 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="p">);</span>
 <span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span>
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Query OK, 0 rows affected
+Tables_in_escuela_db
+estudiantes
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se creó la tabla y aparece en SHOW TABLES.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Resultado esperado: Se muestra la tabla estudiantes.</p>
 <h3 id="paso-11-insertar-tres-registros">Paso 11. Insertar tres registros</h3>
-<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">agrega</span><span class="w"> </span><span class="n">datos</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">ejemplo</span><span class="p">.</span>
-</code></pre></div>
+<p>INSERT INTO agrega datos de ejemplo.</p>
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">estudiantes</span><span class="w"> </span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">programa</span><span class="p">,</span><span class="w"> </span><span class="n">edad</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span>
 <span class="p">(</span><span class="s1">'Ana Ruiz'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Soporte de Sistemas'</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">),</span>
 <span class="p">(</span><span class="s1">'Luis Perez'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Desarrollo Web'</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">),</span>
 <span class="p">(</span><span class="s1">'Sara Gomez'</span><span class="p">,</span><span class="w"> </span><span class="s1">'Bases de Datos'</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">);</span>
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>Query OK, 3 rows affected
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Se agregaron tres registros.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Resultado esperado: El servidor confirma tres filas insertadas.</p>
 <h3 id="paso-12-consultar-y-filtrar-registros">Paso 12. Consultar y filtrar registros</h3>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">permite</span><span class="w"> </span><span class="n">visualizar</span><span class="w"> </span><span class="n">los</span><span class="w"> </span><span class="n">datos</span><span class="p">.</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">filtra</span><span class="w"> </span><span class="n">los</span><span class="w"> </span><span class="n">resultados</span><span class="p">.</span>
-</code></pre></div>
+<p>SELECT permite visualizar los datos. WHERE filtra los resultados.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">estudiantes</span><span class="p">;</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">programa</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">estudiantes</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">edad</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">21</span><span class="p">;</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">estudiantes</span><span class="p">;</span>
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>1 | Ana Ruiz   | Soporte de Sistemas | 20
+2 | Luis Perez | Desarrollo Web      | 22
+3 | Sara Gomez | Bases de Datos      | 21
+total: 3
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Los datos se recuperaron; la consulta filtrada muestra los estudiantes con edad &gt;= 21.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Resultado esperado: Se observan tres registros y total = 3 (si no se ejecutó antes la inserción).</p>
 <h3 id="paso-13-actualizar-y-eliminar-un-dato-de-prueba">Paso 13. Actualizar y eliminar un dato de prueba</h3>
 <p>Practica UPDATE y DELETE usando WHERE para evitar afectar todas las filas.</p>
@@ -1170,6 +1238,14 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">estudiantes</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Sara Gomez'</span><span class="p">;</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">estudiantes</span><span class="p">;</span>
 </code></pre></div>
+<p><strong>Resultado esperado (ejemplo ilustrativo):</strong></p>
+<div class="highlight"><pre><span></span><code>1 | Ana Ruiz   | Soporte de Sistemas | 20
+2 | Luis Perez | Desarrollo Web      | 22
+3 | Sara Gomez | Bases de Datos      | 21
+total: 3
+</code></pre></div>
+<p><strong>Cómo interpretarlo:</strong> Los datos se recuperaron; la consulta filtrada muestra los estudiantes con edad &gt;= 21.</p>
+<p><strong>Si aparece un error:</strong> detente y revisa la sección «Errores frecuentes y soluciones» antes de continuar.</p>
 <p>Resultado esperado: Quedan dos registros. Puedes repetir la práctica recreando la tabla.</p>
 <h3 id="paso-14-salir-y-comprobar-persistencia">Paso 14. Salir y comprobar persistencia</h3>
 <p>Cierra el cliente, vuelve a entrar y consulta la tabla.</p>
@@ -1239,13 +1315,10 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class=
 <p>[ ] Errores identificados y documentados</p>
 <p>Conclusión: el estudiante instaló un motor relacional, distinguió servidor y cliente, creó su primera base de datos y ejecutó operaciones SQL esenciales. La terminal permite completar toda la práctica; Workbench y Docker son opciones complementarias.</p>
 <h2 id="referencias-y-recursos-oficiales">Referencias y recursos oficiales</h2>
-<div class="highlight"><pre><span></span><code>MySQL<span class="w"> </span>Reference<span class="w"> </span>Manual:<span class="w"> </span>https://dev.mysql.com/doc/refman/8.4/en/
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>MySQL<span class="w"> </span>Workbench:<span class="w"> </span>https://dev.mysql.com/doc/workbench/en/
-</code></pre></div>
+<p>MySQL Reference Manual: https://dev.mysql.com/doc/refman/8.4/en/</p>
+<p>MySQL Workbench: https://dev.mysql.com/doc/workbench/en/</p>
 <p>Ubuntu Server – MySQL: https://documentation.ubuntu.com/server/how-to/databases/install-mysql/</p>
-<div class="highlight"><pre><span></span><code>Docker<span class="w"> </span>Official<span class="w"> </span>Image<span class="w"> </span>mysql:<span class="w"> </span>https://hub.docker.com/_/mysql
-</code></pre></div>
+<p>Docker Official Image mysql: https://hub.docker.com/_/mysql</p>
 <p>Nota editorial: diagramas originales ilustrativos; no son capturas de pantalla de una ejecución real. Los nombres y registros de ejemplo son ficticios.</p>
 
 
